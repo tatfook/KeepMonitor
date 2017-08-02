@@ -42,28 +42,28 @@ docker，对dev/test进行构建测试；适当时机将构建部署远程
 
 ## progress
 
+- [x] 分离jenkins配置，方便本地测试后再迁移
+- [ ] 基于官方jenkins docker镜像，构建带docker的镜像
 - [x] docker in docker
-- [ ] 分离jenkins配置，方便本地测试后再迁移
-- [ ] 部署docker jenkins
-- [ ] keepwork环境构建docker镜像
+- [ ] 为keepwork，构建docker镜像
 - [ ] jenkins构建keepwork (dev/test)
-- [ ] jenkins多用户权限配置
+- [x] jenkins多用户权限配置
 
 
 
-**docker in docker**
+### docker in docker
 
 use docker in docker for ci is not a good idea, read this
 [wonderful post!!](http://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/)
 
-**seperate jenkins configuration**
+### seperate jenkins configuration
 
 we use [this][base image] as base
 image. when running a new container, mount local dir with data volumn.
 
 assume mount /home/zdw/tmp/jenkins_home dir with volumn:
 
-    sudo docker run -v /home/zdw/tmp/jenkins_home:/var/jenkins_home -p 8080:8080 --name=ci jenkins/jenkins
+    sudo docker run -d -v /home/zdw/tmp/jenkins_home:/var/jenkins_home -p 8080:8080 jenkins/jenkins
 
 visit localhost:8080, all operations with jenkins will be saved into data volumn
 dir.
@@ -72,9 +72,15 @@ backup this directory and you can migrate jenkins running on docker in
 other machine. just compress and transfer to other machine and run docker `-v
 /<the path>:/var/jenkins_home`. wonderful.
 
-**build jenkins ci image**
+**attention**, uid must be 1000, read [here][base image] for more details.
 
-[base image][base image]
+
+### jenkins image
+
+create dockerfile base on [this image][base image]
+
+### keepwork image
+
 
 
 
