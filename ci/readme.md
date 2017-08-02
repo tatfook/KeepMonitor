@@ -2,8 +2,6 @@
 
 构建服务器
 
-## plan
-
 ## details
 
 **tools**
@@ -11,6 +9,7 @@
 - docker container
 
 **部署在内网还是公网**
+
 内网 pros
 - 构建本身是一个私有的过程，没有强烈的必要使用外网的服务器
 - 使用docker本身已保障运行环境的一致性
@@ -40,4 +39,45 @@ dev/test时常构建， 在构建没有问题的基础上，再部署prod
 结论：jenkins服务部署于docker中，使用docker in
 docker，对dev/test进行构建测试；适当时机将构建部署远程
 
+
+## progress
+
+- [x] docker in docker
+- [ ] 分离jenkins配置，方便本地测试后再迁移
+- [ ] 部署docker jenkins
+- [ ] keepwork环境构建docker镜像
+- [ ] jenkins构建keepwork (dev/test)
+- [ ] jenkins多用户权限配置
+
+
+
+**docker in docker**
+
+use docker in docker for ci is not a good idea, read this
+[wonderful post!!](http://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/)
+
+**seperate jenkins configuration**
+
+we use [this][base image] as base
+image. when running a new container, mount local dir with data volumn.
+
+assume mount /home/zdw/tmp/jenkins_home dir with volumn:
+
+    sudo docker run -v /home/zdw/tmp/jenkins_home:/var/jenkins_home -p 8080:8080 --name=ci jenkins/jenkins
+
+visit localhost:8080, all operations with jenkins will be saved into data volumn
+dir.
+
+backup this directory and you can migrate jenkins running on docker in
+other machine. just compress and transfer to other machine and run docker `-v
+/<the path>:/var/jenkins_home`. wonderful.
+
+**build jenkins ci image**
+
+[base image][base image]
+
+
+
+
+[base image](https://github.com/jenkinsci/docker/blob/master/README.md)
 
