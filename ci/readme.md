@@ -43,9 +43,9 @@ docker，对dev/test进行构建测试；适当时机将构建部署远程
 ## progress
 
 - [x] 分离jenkins配置，方便本地测试后再迁移
+- [ ] 为keepwork，构建docker镜像
 - [ ] 基于官方jenkins docker镜像，构建带docker的镜像
 - [x] docker in docker
-- [ ] 为keepwork，构建docker镜像
 - [ ] jenkins构建keepwork (dev/test)
 - [x] jenkins多用户权限配置
 

@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+  jenkins:
+    build:
+      context: ./jenkins
+      args:
+        http_proxy: http://www:1234567@192.168.0.200:8282
+        https_proxy: http://www:1234567@192.168.0.200:8282
+    volumes:
+      - /home/zdw/tmp/jenkins_home:/var/jenkins_home
+    ports:
+      - "8080:8080"
+  keepwork-dev-container:
+    image: jenkins/jenkins
+    volumes:
+      - dev-container:/project/wikicraft
+      - ./keepwork-dev-container:/script
+    command: /script/update.sh
+
+volumes:
+  dev-container:
+
+
+
+
+

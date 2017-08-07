@@ -1,0 +1,25 @@
+version: "3.3"
+services:
+  container:
+    image: xuntian/npl-runtime
+    volumes:
+      - container:/project/wikicraft
+      - ./container:/script
+    command: /script/update.sh
+  dev-server:
+    image: xuntian/npl-runtime
+    volumes:
+      - container:/project/wikicraft
+      - ./dev-server:/script
+    ports:
+      - "8900:8900"
+    command: /script/start.sh
+
+
+volumes:
+  container:
+
+
+
+
+
