@@ -2,20 +2,38 @@
 #
 # start.sh
 #
-rls_dir="rls"
-test_dir="test"
-build_dir="www_build"
+set -x
 
-DEV_ROOT=/project/wikicraft/dev
-DEV_SOURCE=${DEV_ROOT}/source
+ENV_TYPE=dev
+if [[ $1 == "test" ]]; then
+  ENV_TYPE=test
+fi
 
-# as root of npl runtime
-dev_dir="${DEV_SOURCE}/www"
-log_dir="${DEV_ROOT}/log"
-mkdir -p log_dir
+is_test() {
+  [[ $ENV_TYPE == "test" ]]
+}
 
+
+BASE_DIR=/project/wikicraft/$ENV_TYPE
+LOG_DIR=$BASE_DIR/log
+SOURCE_DIR=$BASE_DIR/source
+
+# ROOT DIR in cmdline must be a relative value base on SOURCE_DIR
+ROOT_DIR=www
+PORT=8900
+if is_test; then
+  ROOT_DIR=test
+  PORT=8099
+fi
+
+mkdir -p $SOURCE_DIR
+mkdir -p $LOG_DIR
+
+# TODO backup log
+cd $SOURCE_DIR
 ulimit -c unlimited
-npl -D bootstrapper="script/apps/WebServer/WebServer.lua"  root="${dev_dir}/" port="8900" logfile="${log_dir}/dev.log"
+npl -D bootstrapper="script/apps/WebServer/WebServer.lua"  root="$ROOT_DIR/" port="$PORT" logfile="$LOG_DIR/$ENV_TYPE.log"
+
 
 backup_log() {
   local typ=$1
@@ -51,27 +69,6 @@ start_server() {
     backup_log ${dev_dir}
     echo "" > "${dev_dir}_log.log"
     npl bootstrapper="script/apps/WebServer/WebServer.lua"  root="${dev_dir}/" port="8900" logfile="${dev_dir}_log.log"
-  fi
-}
-
-stop_server() {
-  local server_type=$1
-
-  if [ $server_type = "test" ]; then
-    pid=`ps uax | grep "npl.*port=8099.*" | grep -v grep | awk '{print $2}'`
-    if [ ! -z $pid ]; then
-      kill -9 $((pid))
-    fi
-  elif [ $server_type = "dev" ]; then
-    pid=`ps uax | grep "npl.*port=8900.*" | grep -v grep | awk '{print $2}'`
-    if [ ! -z $pid ]; then
-      kill -9 $((pid))
-    fi
-  elif [ $server_type = "rls" ]; then
-    pid=`ps uax | grep "npl.*port=8088.*" | grep -v grep | awk '{print $2}'`
-    if [ ! -z $pid ]; then
-      kill -9 $((pid))
-    fi
   fi
 }
 
