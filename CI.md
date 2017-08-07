@@ -86,6 +86,23 @@ server need
 
 ### jenkins
 
+config
+
+all jenkins config and build history are placed in /var/jenkins_home dir as a data volume mounted in docker. it makes migration easier.
+
+docker in docker
+
+don't use docker in docker, use sidling docker instead. mount
+/var/run/docker.sock into ci container so that you can control docker in ci
+container just
+like you control docker on your machine. surprising!!!!
+
+start ci server
+
+    sudo docker pull jenkins/jenkins
+    cd ci
+    sudo docker-compose up -d
+
 
 
 

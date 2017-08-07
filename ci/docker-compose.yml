@@ -1,10 +1,11 @@
 version: "3.3"
 services:
   jenkins:
-    build:
-      context: ./jenkins
+    image: jenkins/jenkins
+    user: root
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
       - /var/jenkins_home:/var/jenkins_home
     ports:
       - "8080:8080"
