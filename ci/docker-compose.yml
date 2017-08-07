@@ -4,6 +4,7 @@ services:
     build:
       context: ./jenkins
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - /var/jenkins_home:/var/jenkins_home
     ports:
       - "8080:8080"

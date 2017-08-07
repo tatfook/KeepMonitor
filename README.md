@@ -24,6 +24,6 @@ a collection of backend ops work.
       -h, show usage
 
 
-## todo
-- [  ] deploy ci server
-- [  ] backup gitlab data
+## keepwork ci/cd
+
+read [this page](./CI.md)

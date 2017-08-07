@@ -43,12 +43,11 @@ docker，对dev/test进行构建测试；适当时机将构建部署远程
 ## progress
 
 - [x] 分离jenkins配置，方便本地测试后再迁移
-- [ ] 为keepwork，构建docker镜像
-- [ ] 基于官方jenkins docker镜像，构建带docker的镜像
+- [x] 为keepwork，构建docker镜像
+- [x] 基于官方jenkins docker镜像，构建带docker的镜像
 - [x] docker in docker
-- [ ] jenkins构建keepwork (dev/test)
 - [x] jenkins多用户权限配置
-
+- [ ] jenkins构建keepwork (dev/test)
 
 
 ### docker in docker
@@ -74,12 +73,18 @@ other machine. just compress and transfer to other machine and run docker `-v
 
 **attention**, uid must be 1000, read [here][base image] for more details.
 
-
 ### jenkins image
 
 create dockerfile base on [this image][base image]
 
-### keepwork image
+
+## deploy
+
+server need
+- docker
+- docker-compose
+
+### jenkins
 
 
 
