@@ -3,6 +3,8 @@ server {
   server_name ${DEV_ADDRESS};
 
   location / {
+      proxy_set_header HOST $http_host;
+      proxy_set_header X-Forwarded-For $remote_addr;
       proxy_pass http://${DEV_HOST}:${DEV_PORT};
   }
 }
@@ -12,6 +14,8 @@ server {
   server_name ${TEST_ADDRESS};
 
   location / {
+      proxy_set_header HOST $http_host;
+      proxy_set_header X-Forwarded-For $remote_addr;
       proxy_pass http://${TEST_HOST}:${TEST_PORT};
   }
 }
