@@ -48,7 +48,7 @@ services:
       - DEV_HOST=dev-server
       - DEV_PORT=8900
       - TEST_ADDRESS=test.keepwork.com
-      - TEST_HOST=dev-server
+      - TEST_HOST=test-server
       - TEST_PORT=8099
     command: /bin/bash -c "envsubst </etc/nginx/conf.d/keepwork.template >/etc/nginx/conf.d/keepwork.conf && nginx -g 'daemon off;'"
 
