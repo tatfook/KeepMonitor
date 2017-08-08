@@ -53,7 +53,7 @@ if [[ ! -d "npl_packages" ]]; then
 fi
 
 # hard link config.page file avoid cp wrong link
-if [[ -e $CONFIG_FILE_PATH ]]; then
+if [[ -e $CONFIG_FILE_PATH ]] && [[ ! -e $CONFIG_FILE_LINK_PATH ]]; then
   ln -s $CONFIG_FILE_PATH $CONFIG_FILE_LINK_PATH
 fi
 
