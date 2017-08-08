@@ -104,6 +104,42 @@ start ci server
     sudo docker-compose up -d
 
 
+### keepwork services
+
+there are two different env that code running: dev and test. every env owns a
+server container and a data container. they mount the same data volume and share source code.
+
+server container runs a npl web server in foreground and never stops. data
+container is restarted by jenkins regularly. it pulls code and does some related
+work and then exists. then server container accesses the updated code and
+provide improved service. ;)
+
+up and running
+
+    sudo docker pull node
+    sudo docker pull xuntian/npl-runtime
+    cd keepwork
+    sudo docker-compose up -d
+
+at the frist time, server container is up instantly but data container pulling
+code is far more slower. so you maybe encount 404 when you browser site address
+right after `docker-compose up`. wait until both two data container process
+exists and it'll be right.
+
+data
+
+they all share one named data volume `keepwork_container`. you can access it in
+`/var/lib/docker/volumes/keepwork_container`
+
+config file
+
+there's one secret file named `config.page`, it's not managed by git repo
+because it contains too much secrets. copy it manually into `info/` dir of data
+volume and script will automatically link it.
+
+### nginx
+TODO
+
 
 
 

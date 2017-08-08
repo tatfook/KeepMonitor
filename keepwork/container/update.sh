@@ -52,7 +52,7 @@ if [[ ! -d "npl_packages" ]]; then
   (cd npl_packages; git clone https://github.com/NPLPackages/main)
 fi
 
-# symbol link config.page file
+# hard link config.page file avoid cp wrong link
 if [[ -e $CONFIG_FILE_PATH ]]; then
   ln -s $CONFIG_FILE_PATH $CONFIG_FILE_LINK_PATH
 fi
@@ -69,17 +69,22 @@ BUILD_DIR=www_build
 
 DEV_DIR=www
 TEST_DIR=test
-if is_test; then
-  if [[ -d $TEMP_DIR ]]; then
-    rm -rf $TEMP_DIR
+
+clean_dir() {
+  if [[ -d $1 ]]; then
+    rm -rf $1
   fi
+}
+
+if is_test; then
+  clean_dir $TEMP_DIR
+  clean_dir $BUILD_DIR
+
   cp -a $DEV_DIR $TEMP_DIR
   node r.js -o r_package.js
-  rm -rf $TEMP_DIR
+  clean_dir $TEMP_DIR
 
+  clean_dir $TEST_DIR
   mv $BUILD_DIR $TEST_DIR
 fi
 
-
-# normal exit
-exit 0
