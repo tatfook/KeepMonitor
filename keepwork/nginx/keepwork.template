@@ -1,0 +1,17 @@
+server {
+  listen 80;
+  server_name ${DEV_ADDRESS};
+
+  location / {
+      proxy_pass http://${DEV_HOST}:${DEV_PORT};
+  }
+}
+
+server {
+  listen 80;
+  server_name ${TEST_ADDRESS};
+
+  location / {
+      proxy_pass http://${TEST_HOST}:${TEST_PORT};
+  }
+}
