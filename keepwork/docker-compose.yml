@@ -44,6 +44,7 @@ services:
       - ./nginx/keepwork.template:/etc/nginx/conf.d/keepwork.template
       - ./nginx/html:/usr/share/nginx/html
     environment:
+      - DOLLAR=$
       - DEV_ADDRESS=dev.keepwork.com
       - DEV_HOST=dev-server
       - DEV_PORT=8900
