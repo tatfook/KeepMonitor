@@ -44,7 +44,8 @@ services:
       - ./nginx/keepwork.template:/etc/nginx/conf.d/keepwork.template
       - ./nginx/html:/usr/share/nginx/html
     environment:
-      - DOLLAR=$
+      # thanks https://stackoverflow.com/questions/40619582/how-can-i-escape-a-dollar-sign-in-a-docker-compose-file
+      - DOLLAR=$$
       - DEV_ADDRESS=dev.keepwork.com
       - DEV_HOST=dev-server
       - DEV_PORT=8900
