@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+  jenkins-slave:
+    image: jenkinsci/jnlp-slave
+    user: root
+    restart: always
+    environment:
+      JENKINS_URL: http://121.14.117.251:8080
+      JENKINS_SECRET: 4934b2cd551f5d6c95f5453d378d04d5eac3de7cdbfdb39212029ed80974bc24
+      JENKINS_AGENT_NAME: keepwork-online
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      #- /usr/local/bin/docker-compose:/usr/local/bin/docker-compose
