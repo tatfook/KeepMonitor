@@ -2,8 +2,6 @@
 #
 # update.sh
 #
-set -x
-
 # default env is dev
 ENV_TYPE=dev
 if [[ $1 == "test" ]]; then
@@ -14,7 +12,6 @@ is_test() {
   [[ $ENV_TYPE == "test" ]]
 }
 
-
 BRANCH=dev
 if is_test; then
   BRANCH=master
@@ -22,35 +19,6 @@ fi
 
 CONFIG_FILE_PATH=/project/wikicraft/info/config.page
 CONFIG_FILE_LINK_PATH=/project/wikicraft/$ENV_TYPE/source/www/wiki/helpers/config.page
-
-mkdir -p /project/wikicraft/$ENV_TYPE/source
-cd /project/wikicraft/$ENV_TYPE/source
-
-# clone repo
-if [[ ! -d ".git" ]]; then
-  rm -rf ./* ./.*
-  git clone https://github.com/tatfook/wikicraft .
-fi
-
-# checkout branch
-git rev-parse --verify $BRANCH
-if [[ $? == 0 ]]; then
-  # branch exists
-  git checkout $BRANCH
-else
-  # branch not exists
-  git checkout -b $BRANCH origin/$BRANCH
-fi
-
-# update code
-git pull
-
-# FIXME
-# clone main pkg for now
-if [[ ! -d "npl_packages" ]]; then
-  mkdir -p npl_packages
-  (cd npl_packages; git clone https://github.com/NPLPackages/main)
-fi
 
 # hard link config.page file avoid cp wrong link
 if [[ -e $CONFIG_FILE_PATH ]] && [[ ! -e $CONFIG_FILE_LINK_PATH ]]; then
