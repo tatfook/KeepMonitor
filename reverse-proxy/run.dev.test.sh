@@ -16,8 +16,7 @@ docker run -d --name=$name -p "80:80" \
   -v "$(pwd)/nginx/html:/usr/share/nginx/html" \
   --link keepwork-dev-server \
   --link keepwork-test-server \
-  --link keepwork-prod-server \
-  -e "DOLLAR=$$" \
+  -e "DOLLAR=\$" \
   -e "DEV_ADDRESS=dev.keepwork.com" \
   -e "DEV_HOST=keepwork-dev-server" \
   -e "DEV_PORT=8900" \
