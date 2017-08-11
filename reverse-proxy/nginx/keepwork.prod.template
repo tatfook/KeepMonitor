@@ -1,0 +1,10 @@
+server {
+  listen 80;
+  server_name ${PROD_ADDRESS};
+
+  location / {
+      proxy_set_header HOST ${DOLLAR}http_host;
+      proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
+      proxy_pass http://${PROD_HOST}:${PROD_PORT};
+  }
+}
