@@ -47,8 +47,7 @@ docker，对dev/test进行构建测试；适当时机将构建部署远程
 - [x] 基于官方jenkins docker镜像，构建带docker的镜像
 - [x] docker in docker
 - [x] jenkins多用户权限配置
-- [ ] jenkins构建keepwork (dev/test)
-
+- [x] jenkins构建keepwork (dev/test)
 
 ### docker in docker
 
@@ -72,11 +71,6 @@ other machine. just compress and transfer to other machine and run docker `-v
 /<the path>:/var/jenkins_home`. wonderful.
 
 **attention**, uid must be 1000, read [here][base image] for more details.
-
-### jenkins image
-
-create dockerfile base on [this image][base image]
-
 
 ## deploy
 
@@ -125,23 +119,6 @@ at the frist time, server container is up instantly but data container pulling
 code is far more slower. so you maybe encount 404 when you browser site address
 right after `docker-compose up`. wait until both two data container process
 exists and it'll be right.
-
-data
-
-they all share one named data volume `keepwork_container`. you can access it in
-`/var/lib/docker/volumes/keepwork_container`
-
-config file
-
-there's one secret file named `config.page`, it's not managed by git repo
-because it contains too much secrets. copy it manually into `info/` dir of data
-volume and script will automatically link it.
-
-### nginx
-TODO
-
-
-
 
 [base image](https://github.com/jenkinsci/docker/blob/master/README.md)
 

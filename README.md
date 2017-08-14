@@ -2,16 +2,6 @@
 
 a collection of backend ops work.
 
-## structure
-
-    .
-    ├── backup_keepwork.sh      # backup database of keepwork regularly
-    ├── LICENSE
-    └── README.md
-
-    0 directories, 3 files
-
-
 ## scripts
 
 **backup_keepwork**
@@ -22,6 +12,10 @@ a collection of backend ops work.
       -b, run backup
       -r backup_file, recovery from file named backup_file in sync directory
       -h, show usage
+
+**todo**
+
+redo the backup work after deploy docker container online
 
 
 ## keepwork ci/cd
