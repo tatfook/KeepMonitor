@@ -9,7 +9,7 @@ if ! command docker &>/dev/null; then
   apt-get remove docker docker-engine docker.io
 
   apt-get update
-  sudo apt-get install \
+  apt-get install -y\
     apt-transport-https \
     ca-certificates \
     curl \
@@ -24,7 +24,9 @@ if ! command docker &>/dev/null; then
     stable"
 
   apt-get update
-  apt-get install docker-ce
+  apt-get install -y docker-ce
+
+  apt-get autoremove
 fi
 
 # install docker-compose
