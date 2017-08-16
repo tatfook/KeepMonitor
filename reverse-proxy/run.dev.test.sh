@@ -17,7 +17,7 @@ docker run -d --name=$name -p "80:80" \
   --link keepwork-dev-server \
   --link keepwork-test-server \
   -e "DOLLAR=\$" \
-  -e "DEV_ADDRESS=dev.keepwork.com" \
+  -e "DEV_ADDRESS=stage.keepwork.com" \
   -e "DEV_HOST=keepwork-dev-server" \
   -e "DEV_PORT=8900" \
   -e "TEST_ADDRESS=test.keepwork.com" \
