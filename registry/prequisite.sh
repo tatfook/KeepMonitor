@@ -9,16 +9,17 @@ echo "1. you should make a little change to openssl.cnf"
 echo "================================="
 
 echo
-openssl version -a
+openssl version -d
 
 echo "================================="
-echo "look at the last line, edit OPENSSLDIR/openssl.cnf"
+echo "please edit file OPENSSLDIR/openssl.cnf"
 echo "make change like below(use your own IP)"
 echo "================================="
 
 cat <<EOF
 ...
 [ v3_ca ]
+# change IP to your server ip
 subjectAltName=IP:192.168.1.10
 ...
 EOF
@@ -26,7 +27,7 @@ EOF
 options=("yes" "no")
 select opt in "${options[@]}"
 do
-  case $opt in
+  case $REPLY in
     "yes")
       echo "good"
       break
@@ -35,7 +36,7 @@ do
       echo "you should finish step 1 first"
       exit 1
       ;;
-    *) echo "invalid option";;
+    *) echo "$REPLY is invalid option";;
   esac
 done
 
