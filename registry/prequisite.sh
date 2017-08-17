@@ -57,7 +57,7 @@ if [[ ! -f $CERT_DIR/domain.crt ]]; then
 fi
 
 echo "================================="
-echo "3. Copy the domain.crt file(scp or rsync) to /etc/docker/certs.d/<IP_in_openssl.cnf>:5000/ca.crt on every Docker client host(including registry server itself)."
+echo "3. Copy the domain.crt file(scp or rsync) to /etc/docker/certs.d/<host_IP>:5000/ca.crt on every Docker client host(including registry server itself)."
 echo "================================="
 
 
