@@ -4,7 +4,7 @@
 # need to be root
 
 
-# install docker
+# install docker, just for ubuntu
 if ! command docker &>/dev/null; then
   apt-get remove docker docker-engine docker.io
 

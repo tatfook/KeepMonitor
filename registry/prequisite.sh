@@ -23,6 +23,22 @@ subjectAltName=IP:192.168.1.10
 ...
 EOF
 
+options=("yes" "no")
+select opt in "${options[@]}"
+do
+  case $opt in
+    "yes")
+      echo "good"
+      break
+      ;;
+    "no")
+      echo "you should finish step 1 first"
+      exit 1
+      ;;
+    *) echo "invalid option";;
+  esac
+done
+
 # link: https://docs.docker.com/registry/insecure/#using-self-signed-certificates
 echo "================================="
 echo "2. generating certfiles"
