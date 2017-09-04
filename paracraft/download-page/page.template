@@ -1,0 +1,74 @@
+```@wiki/js/layouts
+{
+  "img":"http://git.keepwork.com/gitlab_rls_kaitlyn/keepworkdatasource/raw/master/kaitlyn_images/img_1503988395145.png",
+    "title":"欢迎下载ParaCraft",
+    "detail":"Paracraft创意空间是一款面向7岁以上用户的免费的3D创作软件。你可以用它创建3D电影场景，演员，动作，摄影机，字幕，配音，立体视频输出等。 提供PC和手机版下载。下载后可观赏百部优秀3D电影作品，创造属于你的电影世界。",
+    "link":"#",
+    "moreText":"了解更多>>",
+    "info":"最新版本:ver=${version}",
+    "infoLinks":[
+    {
+      "url":"#",
+      "text":"更新日志"
+    }
+    ]
+}
+```
+```@wiki/js/layouts
+{
+  "moduleKind":"PCDownload",
+    "imgUrl":"http://git.keepwork.com/gitlab_rls_kaitlyn/keepworkdatasource/raw/master/kaitlyn_images/img_1503996369093.png",
+    "title":"Windows版",
+    "titleInfo":"34.8MB",
+    "info":"支持 Windows XP, Vista, 7, 8, 8.1 and 10",
+    "iconImg":"http://git.keepwork.com/gitlab_rls_kaitlyn/keepworkdatasource/raw/master/kaitlyn_images/img_1503996562536.png",
+    "btnText":"下载",
+    "rightTitle":"如果下载缓慢, 请用下面镜像地址: ",
+    "details":[
+    {
+      "text":"Paracraft 完整合集版(30MB): 包含32bits/64bits系统，常用插件，服务器，SDK开发环境，代码等",
+      "info":"下载地址",
+      "link":"${baiduyun_link}",
+      "linkText":"[paracraft百度网盘下载]"
+    },
+    {
+      "text":"Paracraft 登陆器(5MB)： NPL运行环境和资源按需下载",
+      "info":"下载地址",
+      "link":"${launcher_link}",
+      "linkText":"[ParacraftLauncher.exe]"
+    },
+    {
+      "text":"CDN镜像(35MB)",
+      "info":"下载地址",
+      "link":"${full_link}",
+      "linkText":"[paracraft_full.exe]"
+    }
+    ]
+}
+```
+```@wiki/js/layouts
+{
+  "moduleKind":"AndroidIOS",
+    "device1":{
+      "img":"http://git.keepwork.com/gitlab_rls_kaitlyn/keepworkdatasource/raw/master/kaitlyn_images/img_1504062266400.png",
+      "title":"Android版",
+      "link":"${andriod_link}",
+      "info":"下载Android APK安装包",
+      "detail":"移动版包含PC版所有功能. 但是目前移动版只适合查看作品。高级编辑功能仍需要鼠标等输入设备. ParacraftSDK允许你方便的发布你的作品到移动端或作为独立的APP发行. 世界/插件/代码/资源都可以在PC和移动端共享."
+    },
+    "device2":{
+      "img":"http://git.keepwork.com/gitlab_rls_kaitlyn/keepworkdatasource/raw/master/kaitlyn_images/img_1504062280837.png",
+      "title":"ios版",
+      "link":"${ios_link}",
+      "info":"下载IOS IPA安装包",
+      "detail":"同android一样，但是由于IOS系统的政策限制，无法像android一样方便的分享文件，当Microsoft支持部署Native IOS应用时，ParacraftSDK也会同样支持."
+    }
+}
+```
+```@wiki/js/title
+{
+  "moduleKind":"title3",
+    "title":"源代码",
+    "content":"我们在尽最大努力开放paracraft/NPL代码并将其模块化. 这个过程需要一段时间. 如果你希望提前预览, 请到Github上联系我.  \n[https://github.com/LiXizhi](https://github.com/LiXizhi)  \n [https://github.com/LiXizhi/ParacraftSDK](https://github.com/LiXizhi/ParacraftSDK)：（大概已经开放70万行）"
+}
+```
