@@ -7,7 +7,7 @@
 # Distributed under terms of the MIT license.
 
 """
-Generate post data for gitlab api
+Generate post data for gitlab api, called by bash script
 
 usage:
 

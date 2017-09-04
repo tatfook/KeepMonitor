@@ -1,10 +1,9 @@
 #! /bin/bash
 #
-# download-template.sh
+# usage: ./update-page.sh
 #
-# usage: ./download-template.sh 0.7.284
-# output: page text
-
+# auto get latest version and update download page
+#
 #######################################################
 # get version number first
 #######################################################
@@ -26,6 +25,9 @@ ver=$(sed -ne 's/.*<UpdateVersion>\(.*\)<\/UpdateVersion>.*/\1/p;q;' <<< "$versi
 # gitlab api private token, important!!!
 PRIVATE_TOKEN=uE4FRNo2AxBw2Wh1XVTv
 
+#######################################################
+# generate new post data
+#######################################################
 # post data managed by python script
 # input key link addresses and output the post_data for gitlab api
 post_data=$(./post-data.py \
@@ -37,10 +39,10 @@ post_data=$(./post-data.py \
   --ios_link 'http://www.pgyer.com/para'
 )
 
+#######################################################
 # update page content
+#######################################################
 address=http://gitlab.keepwork.com/api/v4/projects/3432/repository/commits
-
-# FUCK!!!! curl only works only when no ^I(tab) in data string
 curl -v --request POST \
   --url ${address} \
   --header 'cache-control: no-cache' \
