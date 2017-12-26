@@ -4,42 +4,57 @@ services:
     image: mysql/mysql-server
     networks:
       monit_net:
+        ipv4_address: 172.228.0.2
         aliases:
           - database
     environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=root
   zabbix-server:
+    depends_on:
+      - mysql-server
     image: zabbix/zabbix-server-mysql
     networks:
       monit_net:
+        ipv4_address: 172.228.0.3
         aliases:
           - server
     environment:
-      - DB_SERVER_HOST=mysql
+      - DB_SERVER_HOST=172.228.0.2
+      - MYSQL_DATABASE=zabbix
       - MYSQL_USER=zabbix
       - MYSQL_PASSWORD=zabbix
-    depends_on:
-      - mysql-server
+      - MYSQL_ROOT_PASSWORD=root
     volumes:
       - zabbix-server:/var/lib/zabbix
   zabbix-web:
-    image: zabbix/zabbix-web-nginx-mysql
-    networks:
-      monit_net:
-        aliases:
-          - web
-    environment:
-      - DB_SERVER_HOST=mysql
-      - MYSQL_USER=zabbix
-      - MYSQL_PASSWORD=zabbix
-      - zbx_server_host=server
-      - php-tz="Asia/Shanghai"
     depends_on:
       - mysql-server
       - zabbix-server
+    image: zabbix/zabbix-web-nginx-mysql
+    networks:
+      monit_net:
+        ipv4_address: 172.228.0.4
+        aliases:
+          - web
+    environment:
+      - ZBX_SERVER_HOST=172.228.0.3
+      - DB_SERVER_HOST=172.228.0.2
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=root
+      - PHP_TZ="Asia/Shanghai"
     ports:
       - "7000:80"
 
 networks:
   monit_net:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.228.0.0/24
+
+volumes:
+  zabbix-server:
