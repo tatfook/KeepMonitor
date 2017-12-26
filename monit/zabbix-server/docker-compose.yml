@@ -1,0 +1,45 @@
+version: "3.3"
+services:
+  mysql-server:
+    image: mysql/mysql-server
+    networks:
+      monit_net:
+        aliases:
+          - database
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+  zabbix-server:
+    image: zabbix/zabbix-server-mysql
+    networks:
+      monit_net:
+        aliases:
+          - server
+    environment:
+      - DB_SERVER_HOST=mysql
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+    depends_on:
+      - mysql-server
+    volumes:
+      - zabbix-server:/var/lib/zabbix
+  zabbix-web:
+    image: zabbix/zabbix-web-nginx-mysql
+    networks:
+      monit_net:
+        aliases:
+          - web
+    environment:
+      - DB_SERVER_HOST=mysql
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - zbx_server_host=server
+      - php-tz="Asia/Shanghai"
+    depends_on:
+      - mysql-server
+      - zabbix-server
+    ports:
+      - "7000:80"
+
+networks:
+  monit_net:
+    driver: bridge
